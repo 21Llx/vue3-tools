@@ -2,8 +2,13 @@
 import { ref } from 'vue'
 
 defineProps<{ msg: string }>()
-
+defineExpose({
+  addFn
+})
 const count = ref(0)
+function addFn(){
+  count.value++
+}
 </script>
 
 <template>
