@@ -13,34 +13,52 @@
         @dragover="onDragOver"
         @drop="onDrop"
         @connect="onConnect"
+        @node-click="onNodeClick"
+        @pane-click="onPaneClick"
       >
         <FlowDnD ref="flowDndRef" />
+        <FlowFitView ref="fitViewRef" />
         <Background pattern-color="#e8e8e8" :gap="16" />
         <Controls />
         <Panel position="top-left" class="flow-editor__panel">
-          <span class="flow-editor__tip">从节点边缘拖线连接 · 双击节点改名 · 选中后按 Delete 删除</span>
+          <span class="flow-editor__tip">拖线连接 · 点击节点右侧配置 · 双击快速改名 · Delete 删除</span>
         </Panel>
       </VueFlow>
     </div>
+    <FlowConfigPanel
+      v-if="selectedNode"
+      :node="selectedNode"
+      @update="onNodeConfigUpdate"
+      @close="selectedNodeId = null"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, computed, nextTick } from 'vue';
 import { VueFlow, Panel } from '@vue-flow/core';
 import { Background } from '@vue-flow/background';
 import { Controls } from '@vue-flow/controls';
-import type { Connection, Edge, Node } from '@vue-flow/core';
+import type { Connection, Edge, Node, NodeMouseEvent } from '@vue-flow/core';
 import '@vue-flow/core/dist/style.css';
 import '@vue-flow/core/dist/theme-default.css';
 import '@vue-flow/controls/dist/style.css';
 
 import FlowSidebar from './FlowSidebar.vue';
 import FlowDnD from './FlowDnD.vue';
+import FlowConfigPanel from './FlowConfigPanel.vue';
+import FlowFitView from './FlowFitView.vue';
 import { nodeTypes } from './nodes';
+import type { FlowNodeData } from './types';
+import { parseFlowchartJson, type FlowchartImportResult } from './importFlowchart';
 
-const nodes = ref<Node[]>([]);
+const nodes = ref<Node<FlowNodeData>[]>([]);
 const edges = ref<Edge[]>([]);
+const selectedNodeId = ref<string | null>(null);
+
+const selectedNode = computed(() =>
+  nodes.value.find((n) => n.id === selectedNodeId.value) ?? null,
+);
 
 const defaultEdgeOptions = {
   type: 'smoothstep',
@@ -49,6 +67,7 @@ const defaultEdgeOptions = {
 };
 
 const flowDndRef = ref<InstanceType<typeof FlowDnD>>();
+const fitViewRef = ref<InstanceType<typeof FlowFitView>>();
 
 function onDragOver(event: DragEvent) {
   flowDndRef.value?.onDragOver(event);
@@ -72,9 +91,25 @@ function onConnect(connection: Connection) {
   ];
 }
 
+function onNodeClick({ node }: NodeMouseEvent) {
+  selectedNodeId.value = node.id;
+}
+
+function onPaneClick() {
+  selectedNodeId.value = null;
+}
+
+function onNodeConfigUpdate(data: Partial<FlowNodeData>) {
+  if (!selectedNodeId.value) return;
+  nodes.value = nodes.value.map((n) =>
+    n.id === selectedNodeId.value ? { ...n, data: { ...n.data, ...data } } : n,
+  );
+}
+
 function clear() {
   nodes.value = [];
   edges.value = [];
+  selectedNodeId.value = null;
 }
 
 function exportData() {
@@ -90,9 +125,15 @@ function exportData() {
   };
 }
 
-function importData(data: { nodes: Node[]; edges: Edge[] }) {
-  nodes.value = data.nodes ?? [];
-  edges.value = data.edges ?? [];
+async function importData(input: string | FlowchartImportResult) {
+  const parsed = parseFlowchartJson(input);
+  nodes.value = parsed.nodes;
+  edges.value = parsed.edges;
+  selectedNodeId.value = null;
+  flowDndRef.value?.syncIdCounter(parsed.nodes);
+  await nextTick();
+  fitViewRef.value?.fit();
+  return parsed;
 }
 
 defineExpose({ clear, exportData, importData });

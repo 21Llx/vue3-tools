@@ -1,7 +1,7 @@
 <template>
   <aside class="flow-sidebar">
     <h3 class="flow-sidebar__title">流程控件</h3>
-    <p class="flow-sidebar__hint">拖拽到右侧画布，放置后可双击改名</p>
+    <p class="flow-sidebar__hint">拖拽到画布，点击节点在右侧配置属性</p>
     <ul class="flow-sidebar__list">
       <li
         v-for="item in paletteItems"

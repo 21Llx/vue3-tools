@@ -23,12 +23,9 @@
 import { ref, computed, nextTick } from 'vue';
 import { useNode, useVueFlow } from '@vue-flow/core';
 import { NODE_LABELS, type FlowNodeType } from './labels';
+import type { FlowNodeData } from '../types';
 
-interface NodeData {
-  label?: string;
-}
-
-const { node } = useNode<NodeData>();
+const { node } = useNode<FlowNodeData>();
 const { updateNodeData } = useVueFlow();
 
 const editing = ref(false);

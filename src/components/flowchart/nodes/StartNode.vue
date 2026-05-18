@@ -1,7 +1,7 @@
 <template>
   <div class="flow-node flow-node--start">
     <FlowNodeLabel />
-    <Handle type="source" :position="Position.Bottom" />
+    <Handle type="source" :position="Position.Right" />
   </div>
 </template>
 

@@ -2,6 +2,8 @@
 import { useVueFlow } from '@vue-flow/core';
 import type { Node } from '@vue-flow/core';
 import { NODE_LABELS, type FlowNodeType } from './nodes/labels';
+import { createDefaultNodeData } from './types';
+import type { FlowNodeData } from './types';
 
 const DND_TYPE = 'application/vueflow';
 
@@ -20,7 +22,7 @@ function onDragOver(event: DragEvent) {
   }
 }
 
-function buildNodeFromDrop(event: DragEvent): Node | null {
+function buildNodeFromDrop(event: DragEvent): Node<FlowNodeData> | null {
   const type = event.dataTransfer?.getData(DND_TYPE) as FlowNodeType;
   if (!type || !NODE_LABELS[type]) return null;
 
@@ -29,11 +31,22 @@ function buildNodeFromDrop(event: DragEvent): Node | null {
     id: nextId(),
     type,
     position,
-    data: { label: NODE_LABELS[type] },
+    data: createDefaultNodeData(type),
   };
 }
 
-defineExpose({ onDragOver, buildNodeFromDrop });
+function syncIdCounter(existingNodes: Node<FlowNodeData>[]) {
+  let max = 0;
+  for (const node of existingNodes) {
+    const match = /^node_(\d+)$/.exec(node.id);
+    if (match) {
+      max = Math.max(max, Number.parseInt(match[1], 10));
+    }
+  }
+  nodeId = max;
+}
+
+defineExpose({ onDragOver, buildNodeFromDrop, syncIdCounter });
 </script>
 
 <template />
