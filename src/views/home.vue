@@ -3,6 +3,7 @@
     home
     <Button @click="toQiankun">跳转 微应用</Button>
     <Button @click="toFlowchart">流程图设计器</Button>
+    <Button @click="toLottery">幸运抽奖</Button>
   </div>
 </template>
 <script lang='ts' setup>
@@ -14,6 +15,9 @@ const toQiankun = () => {
 };
 const toFlowchart = () => {
   router.push('/flowchart');
+};
+const toLottery = () => {
+  router.push('/lottery');
 };
 </script>
 <style lang='less' scoped>

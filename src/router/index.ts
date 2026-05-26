@@ -41,6 +41,11 @@ const routes = [
     name: 'flowchart',
     component: () => import('@/views/flowchart.vue'),
   },
+  {
+    path: '/lottery',
+    name: 'lottery',
+    component: () => import('@/views/lottery.vue'),
+  },
 ]
 export const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH),
