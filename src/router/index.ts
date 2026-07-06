@@ -46,6 +46,16 @@ const routes = [
     name: 'lottery',
     component: () => import('@/views/lottery.vue'),
   },
+  {
+    path: '/verify-code',
+    name: 'verifyCode',
+    component: () => import('@/views/verify-code.vue'),
+  },
+  {
+    path: '/dice',
+    name: 'dice',
+    component: () => import('@/views/dice.vue'),
+  },
 ]
 export const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH),

@@ -4,6 +4,8 @@
     <Button @click="toQiankun">跳转 微应用</Button>
     <Button @click="toFlowchart">流程图设计器</Button>
     <Button @click="toLottery">幸运抽奖</Button>
+    <Button @click="toVerifyCode">验证码输入</Button>
+    <Button @click="toDice">摇骰子</Button>
   </div>
 </template>
 <script lang='ts' setup>
@@ -18,6 +20,12 @@ const toFlowchart = () => {
 };
 const toLottery = () => {
   router.push('/lottery');
+};
+const toVerifyCode = () => {
+  router.push('/verify-code');
+};
+const toDice = () => {
+  router.push('/dice');
 };
 </script>
 <style lang='less' scoped>
