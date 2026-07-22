@@ -70,7 +70,7 @@ const rolling = ref(false);
 const hasRolled = ref(false);
 const history = ref<{ values: number[]; total: number }[]>([]);
 
-const diceSize = computed(() => (diceCount.value === 1 ? 56 : diceCount.value === 2 ? 52 : 48));
+const diceSize = computed(() => (diceCount.value === 1 ? 52 : diceCount.value === 2 ? 48 : 44));
 const total = computed(() => diceValues.value.reduce((sum, v) => sum + v, 0));
 
 function randomDice() {
@@ -160,9 +160,13 @@ watch(diceCount, (count) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    min-height: 100px;
-    padding: 28px 16px;
+    gap: 24px;
+    min-height: 120px;
+    padding: 32px 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.15);
     background: rgba(255, 255, 255, 0.06);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
