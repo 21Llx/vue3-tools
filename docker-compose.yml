@@ -1,0 +1,12 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vue3-app:build
+    container_name: vue3-app-build
+    volumes:
+      - ./dist:/output
+
+
+
