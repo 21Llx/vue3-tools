@@ -6,6 +6,7 @@
     <Button @click="toLottery">幸运抽奖</Button>
     <Button @click="toVerifyCode">验证码输入</Button>
     <Button @click="toDice">摇骰子</Button>
+    <Button @click="toSpeech">文字朗读</Button>
   </div>
 </template>
 <script lang='ts' setup>
@@ -26,6 +27,9 @@ const toVerifyCode = () => {
 };
 const toDice = () => {
   router.push('/dice');
+};
+const toSpeech = () => {
+  router.push('/speech');
 };
 </script>
 <style lang='less' scoped>

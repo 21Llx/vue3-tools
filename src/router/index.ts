@@ -56,6 +56,11 @@ const routes = [
     name: 'dice',
     component: () => import('@/views/dice.vue'),
   },
+  {
+    path: '/speech',
+    name: 'speech',
+    component: () => import('@/views/speech.vue'),
+  },
 ]
 export const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH),
