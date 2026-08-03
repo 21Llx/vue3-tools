@@ -7,6 +7,7 @@
     <Button @click="toVerifyCode">验证码输入</Button>
     <Button @click="toDice">摇骰子</Button>
     <Button @click="toSpeech">文字朗读</Button>
+    <Button @click="toTowerDefense">塔防试玩</Button>
   </div>
 </template>
 <script lang='ts' setup>
@@ -30,6 +31,9 @@ const toDice = () => {
 };
 const toSpeech = () => {
   router.push('/speech');
+};
+const toTowerDefense = () => {
+  router.push('/tower-defense');
 };
 </script>
 <style lang='less' scoped>

@@ -61,6 +61,11 @@ const routes = [
     name: 'speech',
     component: () => import('@/views/speech.vue'),
   },
+  {
+    path: '/tower-defense',
+    name: 'towerDefense',
+    component: () => import('@/views/tower-defense.vue'),
+  },
 ]
 export const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH),
