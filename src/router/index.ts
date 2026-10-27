@@ -62,6 +62,11 @@ const routes = [
     component: () => import('@/views/speech.vue'),
   },
   {
+    path: '/qrcode',
+    name: 'qrcode',
+    component: () => import('@/views/qrcode.vue'),
+  },
+  {
     path: '/tower-defense',
     name: 'towerDefense',
     component: () => import('@/views/tower-defense.vue'),

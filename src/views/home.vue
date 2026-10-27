@@ -7,6 +7,7 @@
     <Button @click="toVerifyCode">验证码输入</Button>
     <Button @click="toDice">摇骰子</Button>
     <Button @click="toSpeech">文字朗读</Button>
+    <Button @click="toQrcode">二维码生成</Button>
     <Button @click="toTowerDefense">塔防试玩</Button>
   </div>
 </template>
@@ -31,6 +32,9 @@ const toDice = () => {
 };
 const toSpeech = () => {
   router.push('/speech');
+};
+const toQrcode = () => {
+  router.push('/qrcode');
 };
 const toTowerDefense = () => {
   router.push('/tower-defense');
