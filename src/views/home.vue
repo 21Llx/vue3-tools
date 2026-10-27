@@ -9,6 +9,8 @@
     <Button @click="toSpeech">文字朗读</Button>
     <Button @click="toQrcode">二维码生成</Button>
     <Button @click="toTowerDefense">塔防试玩</Button>
+    <Button @click="toLineField">线条力场</Button>
+    <Button @click="toGrayLines">灰度线条</Button>
   </div>
 </template>
 <script lang='ts' setup>
@@ -38,6 +40,12 @@ const toQrcode = () => {
 };
 const toTowerDefense = () => {
   router.push('/tower-defense');
+};
+const toLineField = () => {
+  router.push('/line-field');
+};
+const toGrayLines = () => {
+  router.push('/gray-lines');
 };
 </script>
 <style lang='less' scoped>

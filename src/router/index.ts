@@ -71,6 +71,16 @@ const routes = [
     name: 'towerDefense',
     component: () => import('@/views/tower-defense.vue'),
   },
+  {
+    path: '/line-field',
+    name: 'lineField',
+    component: () => import('@/views/line-field.vue'),
+  },
+  {
+    path: '/gray-lines',
+    name: 'grayLines',
+    component: () => import('@/views/gray-lines.vue'),
+  },
 ]
 export const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH),
