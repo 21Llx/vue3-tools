@@ -81,6 +81,16 @@ const routes = [
     name: 'grayLines',
     component: () => import('@/views/gray-lines.vue'),
   },
+  {
+    path: '/infinite-loom',
+    name: 'infiniteLoom',
+    component: () => import('@/views/infinite-loom.vue'),
+  },
+  {
+    path: '/data-viz-3d',
+    name: 'dataViz3d',
+    component: () => import('@/views/data-viz-3d.vue'),
+  },
 ]
 export const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH),

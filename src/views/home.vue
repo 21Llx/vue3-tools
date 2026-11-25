@@ -11,6 +11,8 @@
     <Button @click="toTowerDefense">塔防试玩</Button>
     <Button @click="toLineField">线条力场</Button>
     <Button @click="toGrayLines">灰度线条</Button>
+    <Button @click="toInfiniteLoom">无限织机</Button>
+    <Button @click="toDataViz3d">3D 数据可视化</Button>
   </div>
 </template>
 <script lang='ts' setup>
@@ -46,6 +48,12 @@ const toLineField = () => {
 };
 const toGrayLines = () => {
   router.push('/gray-lines');
+};
+const toInfiniteLoom = () => {
+  router.push('/infinite-loom');
+};
+const toDataViz3d = () => {
+  router.push('/data-viz-3d');
 };
 </script>
 <style lang='less' scoped>
